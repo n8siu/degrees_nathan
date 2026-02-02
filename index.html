@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Northwind °Ñ Weather</title>
+    <title>Ñathan °Ñ Weather</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,7 +23,7 @@
             <div class="brand">
               <div class="logo">°Ñ</div>
               <div>
-                <p class="eyebrow">Northwind</p>
+                <p class="eyebrow">Ñathan</p>
                 <h1>Weather in the °Ñ scale</h1>
               </div>
             </div>
@@ -95,15 +95,19 @@
             <p class="eyebrow">Scale guide</p>
             <h2>°Ñ thermometer</h2>
             <p>
-              0°Ñ = 0°C = 32°F and 100°Ñ = 37.8°C = 100°F. The app keeps all three
-              in sync.
+              The Ñathan °Ñ scale is a temperature scale where 0 °Ñ is the freezing point
+              of water (matching 0 Celsius) and 100 °Ñ is a hot summer day (matching 100 Fahrenheit).
+            </p>
+            <p>
+              0 °Ñ = 0 °C = 32 °F and 100 °Ñ = 37.8 °C = 100 °F. This webapp lets you easily visualize
+              the conversion.
             </p>
           </header>
 
           <div class="thermo">
             <div class="thermo-track-wrap">
               <div class="thermo-track">
-                <div class="thermo-fill" id="thermo-fill"></div>
+                <div class="thermo-fill" id="thermo-fill"></div> 
               </div>
               <div class="thermo-pointer" id="thermo-pointer">
                 <span id="thermo-value">-- °Ñ</span>
@@ -140,6 +144,21 @@
               <strong id="compare-f">-- °F</strong>
             </div>
           </div>
+
+          <header class="scale-header">
+            <p class="eyebrow">Understanding the scale</p>
+            <h2>How does this work?</h2>
+            <p>
+              The Fahrenheit temperature scale was originally proposed to reflect the average human body temperature
+              at 96 °F and the freezing point of water at 32 °F. With the Fahrenheit scale, weather temperatures are 
+              relatively intuitive for everyday use, but the is not ideal for scientific applications. While the 
+              Celsius scale is more scientifically useful, its weather temperatures fall in a range that is less 
+              intuitive for everyday use - for example, in Los Angeles, the average high temperature in August is 29 °C,
+              and the average low temperature in December is 9 °C. This range of just 20 degrees can make it harder to
+              quickly assess how hot or cold the weather feels.
+            </p>
+          </header>
+
         </section>
       </div>
 
