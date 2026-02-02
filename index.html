@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Northwind °Ñ Weather</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="orb orb--left" aria-hidden="true"></div>
+    <div class="orb orb--right" aria-hidden="true"></div>
+
+    <main class="app" data-theme="clear">
+      <div class="views" id="views" aria-live="polite">
+        <section class="view view--weather" aria-label="Weather view">
+          <header class="topbar">
+            <div class="brand">
+              <div class="logo">°Ñ</div>
+              <div>
+                <p class="eyebrow">Northwind</p>
+                <h1>Weather in the °Ñ scale</h1>
+              </div>
+            </div>
+            <button class="geo" id="geo-btn" type="button">Use my location</button>
+          </header>
+
+          <section class="search">
+            <form id="search-form" autocomplete="off">
+              <label class="sr-only" for="search-input">Search location</label>
+              <div class="search-field">
+                <input
+                  id="search-input"
+                  name="location"
+                  type="search"
+                  placeholder="Search city or postal code"
+                  minlength="2"
+                  required
+                />
+                <button type="submit">Search</button>
+              </div>
+            </form>
+            <div class="status" id="status" role="status" aria-live="polite"></div>
+            <div class="results" id="results" aria-live="polite"></div>
+          </section>
+
+          <section class="current" aria-live="polite">
+            <div class="current-main">
+              <p class="location" id="location">Loading...</p>
+              <div class="temp">
+                <span class="temp-value" id="temp-n">--</span>
+                <span class="unit">°Ñ</span>
+              </div>
+              <p class="temp-c" id="temp-c">-- °C</p>
+              <p class="summary" id="summary">Checking the breeze...</p>
+            </div>
+            <div class="current-stats">
+              <div class="stat">
+                <span>Feels like</span>
+                <strong id="feels">--</strong>
+              </div>
+              <div class="stat">
+                <span>Humidity</span>
+                <strong id="humidity">--</strong>
+              </div>
+              <div class="stat">
+                <span>Wind</span>
+                <strong id="wind">--</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="forecast">
+            <div class="section-title">
+              <h2>Outlook</h2>
+              <p>Next few days in °Ñ.</p>
+            </div>
+            <div class="forecast-grid" id="forecast-grid"></div>
+          </section>
+
+          <section class="scale">
+            <h2>The °Ñ conversion</h2>
+            <p><strong>°Ñ = (45 / 17) × °C</strong></p>
+            <p>Swipe left for the full scale guide.</p>
+          </section>
+        </section>
+
+        <section class="view view--scale" aria-label="Scale guide">
+          <header class="scale-header">
+            <p class="eyebrow">Scale guide</p>
+            <h2>°Ñ thermometer</h2>
+            <p>
+              0°Ñ = 0°C = 32°F and 100°Ñ = 37.8°C = 100°F. The app keeps all three
+              in sync.
+            </p>
+          </header>
+
+          <div class="thermo">
+            <div class="thermo-track-wrap">
+              <div class="thermo-track">
+                <div class="thermo-fill" id="thermo-fill"></div>
+              </div>
+              <div class="thermo-pointer" id="thermo-pointer">
+                <span id="thermo-value">-- °Ñ</span>
+              </div>
+            </div>
+            <div class="thermo-marks">
+              <div class="thermo-mark">
+                <span>Hot</span>
+                <small>100°Ñ · 37.8°C · 100°F</small>
+              </div>
+              <div class="thermo-mark">
+                <span>Warm</span>
+                <small>50°Ñ · 18.9°C · 66°F</small>
+              </div>
+              <div class="thermo-mark">
+                <span>Cold</span>
+                <small>0°Ñ · 0°C · 32°F</small>
+              </div>
+            </div>
+          </div>
+          <p class="thermo-note" id="thermo-note"></p>
+
+          <div class="compare">
+            <div class="compare-card">
+              <span>Right now in °Ñ</span>
+              <strong id="compare-n">-- °Ñ</strong>
+            </div>
+            <div class="compare-card">
+              <span>Right now in °C</span>
+              <strong id="compare-c">-- °C</strong>
+            </div>
+            <div class="compare-card">
+              <span>Right now in °F</span>
+              <strong id="compare-f">-- °F</strong>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <nav class="view-switcher" aria-label="View switcher">
+        <button class="view-btn is-active" type="button" data-view="0" aria-pressed="true">
+          Weather
+        </button>
+        <button class="view-btn" type="button" data-view="1" aria-pressed="false">
+          °Ñ Scale
+        </button>
+      </nav>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
