@@ -44,7 +44,8 @@ const setStatus = (message) => {
 const cToN = (celsius) => celsius * SCALE_FACTOR;
 const cToF = (celsius) => (celsius * 9) / 5 + 32;
 
-const formatTempN = (celsius) => `${cToN(celsius).toFixed(1)}°Ñ`;
+const formatTempNValue = (celsius) => `${Math.round(cToN(celsius))}`;
+const formatTempN = (celsius) => `${formatTempNValue(celsius)} °Ñ`;
 const formatTempC = (celsius) => `${celsius.toFixed(1)} °C`;
 
 const getWeatherMeta = (code) => {
@@ -132,7 +133,7 @@ const updateCurrent = (data, label) => {
   const humidity = humiditySeries[index];
 
   locationEl.textContent = label || "Current location";
-  tempNEl.textContent = cToN(current.temperature).toFixed(1);
+  tempNEl.textContent = formatTempNValue(current.temperature);
   tempCEl.textContent = formatTempC(current.temperature);
   summaryEl.textContent = weatherMeta.label;
   feelsEl.textContent = feelsLike ? formatTempN(feelsLike) : "--";
@@ -148,11 +149,11 @@ const updateScaleView = (celsius) => {
   if (!Number.isFinite(celsius)) return;
   const nValue = cToN(celsius);
 
-  if (compareNEl) compareNEl.textContent = `${nValue.toFixed(1)} °Ñ`;
+  if (compareNEl) compareNEl.textContent = `${Math.round(nValue)} °Ñ`;
   if (compareCEl) compareCEl.textContent = `${celsius.toFixed(1)} °C`;
   if (compareFEl) compareFEl.textContent = `${cToF(celsius).toFixed(1)} °F`;
 
-  if (thermoValueEl) thermoValueEl.textContent = `${nValue.toFixed(1)} °Ñ`;
+  if (thermoValueEl) thermoValueEl.textContent = `${Math.round(nValue)} °Ñ`;
   if (!thermoFillEl || !thermoPointerEl) return;
 
   const minN = 0;
@@ -200,7 +201,7 @@ const updateForecast = (data) => {
       </div>
       <div class="range">${
         Number.isFinite(minTemps[i]) && Number.isFinite(maxTemps[i])
-          ? `${formatTempN(minTemps[i])} / ${formatTempN(maxTemps[i])}`
+          ? `${Math.round(cToN(maxTemps[i]))} / ${Math.round(cToN(minTemps[i]))} °Ñ`
           : "--"
       }</div>
     `;

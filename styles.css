@@ -132,6 +132,19 @@ h1 {
   transform: translateY(-1px);
 }
 
+.geo-inline {
+  align-self: stretch;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  background: var(--accent-2);
+  color: #1f2937;
+}
+
 .search {
   margin-top: 24px;
   display: grid;
@@ -140,7 +153,7 @@ h1 {
 
 .search-field {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: 10px;
 }
 
@@ -151,6 +164,7 @@ h1 {
   font-size: 15px;
   background: var(--glass);
   box-shadow: var(--shadow);
+  height: 48px;
 }
 
 .search button {
@@ -162,6 +176,7 @@ h1 {
   color: #0f172a;
   cursor: pointer;
   transition: transform var(--transition);
+  height: 48px;
 }
 
 .search button:hover {
