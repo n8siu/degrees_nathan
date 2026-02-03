@@ -167,7 +167,7 @@ const updateScaleView = (celsius) => {
   const minN = 0;
   const maxN = 100;
   const clamped = Math.min(1, Math.max(0, (nValue - minN) / (maxN - minN)));
-  thermoFillEl.style.height = `${clamped * 100}%`;
+  thermoFillEl.style.height = `${(1 - clamped) * 100}%`;
   thermoPointerEl.style.top = `${(1 - clamped) * 100}%`;
 
   if (thermoNoteEl) {
@@ -195,7 +195,7 @@ const updateInteractiveThermo = (nValue) => {
   if (interactiveFEl) interactiveFEl.textContent = `${cToF(celsius).toFixed(1)} °F`;
 
   if (interactiveFillEl) {
-    interactiveFillEl.style.height = `${percent * 100}%`;
+    interactiveFillEl.style.height = `${(1 - percent) * 100}%`;
   }
   if (interactiveHandleEl) {
     interactiveHandleEl.style.top = `${(1 - percent) * 100}%`;
