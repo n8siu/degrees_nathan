@@ -445,9 +445,11 @@ h1 {
 
 .view--interactive {
   display: grid;
-  gap: 6px;
-  padding-top: 18px;
+  gap: 8px;
+  padding-top: 16px;
   padding-bottom: 64px;
+  align-content: start;
+  align-items: start;
 }
 
 .view--interactive .scale-header p {
@@ -459,18 +461,18 @@ h1 {
   display: grid;
   gap: 4px;
   align-items: center;
-  padding: 14px 14px 0;
+  padding: 12px 14px 10px;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.8);
   box-shadow: var(--shadow);
-  margin-top: -380px;
+  margin-top: 20px;
 }
 
 .interactive-thermo {
   position: relative;
   height: 320px;
   width: 112px;
-  margin: 0 auto;
+  margin: 10px auto;
   touch-action: none;
 }
 
@@ -509,8 +511,8 @@ h1 {
 
 .interactive-readout {
   text-align: center;
-  margin-top: -230px;
-  padding-bottom: 2px;
+  margin-top: 6px;
+  padding-bottom: 0;
 }
 
 .interactive-big {
