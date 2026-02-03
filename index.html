@@ -88,7 +88,7 @@
           <section class="scale">
             <h2>The °Ñ conversion</h2>
             <p><strong>°Ñ = (45 / 17) × °C</strong></p>
-            <p>Swipe left for the full scale guide.</p>
+            <p>See the next page the full scale guide.</p>
           </section>
         </section>
 
@@ -153,14 +153,46 @@
             <p>
               The Fahrenheit temperature scale was originally proposed to reflect the average human body temperature
               at 96 °F and the freezing point of water at 32 °F. With the Fahrenheit scale, weather temperatures are 
-              relatively intuitive for everyday use, but the is not ideal for scientific applications. While the 
-              Celsius scale is more scientifically useful, its weather temperatures fall in a range that is less 
+              relatively intuitive (100 °F is a hot summer's day), but not ideal for scientific applications. While the 
+              Celsius scale is more scientifically useful, its weather temperatures fall in a range less 
               intuitive for everyday use - for example, in Los Angeles, the average high temperature in August is 29 °C,
               and the average low temperature in December is 9 °C. This range of just 20 degrees can make it harder to
               quickly assess how hot or cold the weather feels.
             </p>
           </header>
 
+        </section>
+
+        <section class="view view--interactive" aria-label="Interactive thermometer">
+          <header class="scale-header">
+            <p class="eyebrow">Hands on</p>
+            <h2>Try out the °Ñ thermometer</h2>
+            <p>Explore the Ñathan temperature scale by interacting with the thermometer below. 
+                Swipe up or down to set a temperature and see the conversion.
+            </p>
+          </header>
+
+          <div class="interactive">
+            <div
+              class="interactive-thermo"
+              id="interactive-thermo"
+              role="slider"
+              aria-label="Interactive thermometer"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+            >
+              <div class="interactive-track">
+                <div class="interactive-fill" id="interactive-fill"></div>
+              </div>
+              <div class="interactive-handle" id="interactive-handle"></div>
+            </div>
+            <div class="interactive-readout">
+              <div class="interactive-big" id="interactive-n">-- °Ñ</div>
+              <div class="interactive-sub" id="interactive-c">-- °C</div>
+              <div class="interactive-sub" id="interactive-f">-- °F</div>
+            </div>
+          </div>
         </section>
       </div>
 
@@ -170,6 +202,9 @@
         </button>
         <button class="view-btn" type="button" data-view="1" aria-pressed="false">
           °Ñ Scale
+        </button>
+        <button class="view-btn" type="button" data-view="2" aria-pressed="false">
+          Temp Conversion
         </button>
       </nav>
     </main>

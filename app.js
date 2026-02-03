@@ -21,6 +21,12 @@ const thermoNoteEl = document.getElementById("thermo-note");
 const compareNEl = document.getElementById("compare-n");
 const compareCEl = document.getElementById("compare-c");
 const compareFEl = document.getElementById("compare-f");
+const interactiveThermoEl = document.getElementById("interactive-thermo");
+const interactiveFillEl = document.getElementById("interactive-fill");
+const interactiveHandleEl = document.getElementById("interactive-handle");
+const interactiveNEl = document.getElementById("interactive-n");
+const interactiveCEl = document.getElementById("interactive-c");
+const interactiveFEl = document.getElementById("interactive-f");
 
 const WEATHER_LABELS = [
   { codes: [0], label: "Clear sky", theme: "clear" },
@@ -43,6 +49,7 @@ const setStatus = (message) => {
 
 const cToN = (celsius) => celsius * SCALE_FACTOR;
 const cToF = (celsius) => (celsius * 9) / 5 + 32;
+const nToC = (nValue) => nValue / SCALE_FACTOR;
 
 const formatTempNValue = (celsius) => `${Math.round(cToN(celsius))}`;
 const formatTempN = (celsius) => `${formatTempNValue(celsius)} °Ñ`;
@@ -143,6 +150,7 @@ const updateCurrent = (data, label) => {
     : "--";
 
   updateScaleView(current.temperature);
+  updateInteractiveThermo(cToN(current.temperature));
 };
 
 const updateScaleView = (celsius) => {
@@ -171,6 +179,86 @@ const updateScaleView = (celsius) => {
       thermoNoteEl.textContent = "";
     }
   }
+};
+
+const updateInteractiveThermo = (nValue) => {
+  if (!Number.isFinite(nValue)) return;
+  const minN = 0;
+  const maxN = 100;
+  const clamped = Math.min(maxN, Math.max(minN, nValue));
+  const percent = (clamped - minN) / (maxN - minN);
+
+  if (interactiveNEl) interactiveNEl.textContent = `${Math.round(clamped)} °Ñ`;
+
+  const celsius = nToC(clamped);
+  if (interactiveCEl) interactiveCEl.textContent = `${celsius.toFixed(1)} °C`;
+  if (interactiveFEl) interactiveFEl.textContent = `${cToF(celsius).toFixed(1)} °F`;
+
+  if (interactiveFillEl) {
+    interactiveFillEl.style.height = `${percent * 100}%`;
+  }
+  if (interactiveHandleEl) {
+    interactiveHandleEl.style.top = `${(1 - percent) * 100}%`;
+  }
+  if (interactiveThermoEl) {
+    interactiveThermoEl.setAttribute("aria-valuenow", `${Math.round(clamped)}`);
+  }
+};
+
+const initInteractiveThermo = () => {
+  if (!interactiveThermoEl) return;
+
+  let isDragging = false;
+  let lastTick = null;
+  const tickPoints = [0, 50, 100];
+  const tickThreshold = 1.5;
+  const vibrate = (pattern) => {
+    if (navigator.vibrate) {
+      navigator.vibrate(pattern);
+    }
+  };
+
+  const updateFromEvent = (event) => {
+    const rect = interactiveThermoEl.getBoundingClientRect();
+    const clientY = event.clientY ?? (event.touches && event.touches[0]?.clientY);
+    if (!clientY) return;
+    const offset = Math.min(rect.height, Math.max(0, clientY - rect.top));
+    const percent = 1 - offset / rect.height;
+    const value = percent * 100;
+    updateInteractiveThermo(value);
+
+    const nearest = tickPoints.find((point) => Math.abs(point - value) <= tickThreshold);
+    if (nearest !== undefined && nearest !== lastTick) {
+      vibrate(15);
+      lastTick = nearest;
+    }
+    if (nearest === undefined) {
+      lastTick = null;
+    }
+  };
+
+  const onPointerDown = (event) => {
+    isDragging = true;
+    interactiveThermoEl.setPointerCapture(event.pointerId);
+    updateFromEvent(event);
+  };
+
+  const onPointerMove = (event) => {
+    if (!isDragging) return;
+    updateFromEvent(event);
+  };
+
+  const onPointerUp = (event) => {
+    isDragging = false;
+    interactiveThermoEl.releasePointerCapture(event.pointerId);
+  };
+
+  interactiveThermoEl.addEventListener("pointerdown", onPointerDown);
+  interactiveThermoEl.addEventListener("pointermove", onPointerMove);
+  interactiveThermoEl.addEventListener("pointerup", onPointerUp);
+  interactiveThermoEl.addEventListener("pointercancel", onPointerUp);
+
+  updateInteractiveThermo(50);
 };
 
 const updateForecast = (data) => {
@@ -339,6 +427,7 @@ const init = () => {
   document.getElementById("search-form").addEventListener("submit", handleSearch);
   document.getElementById("geo-btn").addEventListener("click", useGeolocation);
   initViewSwitcher();
+  initInteractiveThermo();
 
   const restored = restoreLastLocation();
   if (!restored) {
